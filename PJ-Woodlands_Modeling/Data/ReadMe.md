@@ -3,7 +3,7 @@ Data provided in "All_Combined_PJ_Assoc_NoRH.csv" for random forest modeling of 
 NRI data is available through a confidentiality agreement(email NRI@usda.gov).
 
 
-Column-level metadata:
+Column-level metadata
 -All_Combined_PJ_Assoc_NoRH.csv
 bd_depth_0_5 – Numeric: bulk density at 0–5 cm depth (g/cm³) from POLARIS bd_mean, NA where nodata returned.
 bd_depth_100_200 – Numeric: bulk density at 100–200 cm depth (g/cm³) from POLARIS, NA when missing.
