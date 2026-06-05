@@ -1,1 +1,8 @@
 R-proj to do initial data cleaning and create figures of rangeland health and ground cover relationships
+
+File-level metadata:
+
+-1_data-clean-organize-PJ-Woodlands.qmd: Quarto document/script to clean and do initial exploratory data analysis on AIM/LMF and NRI points in Landscape Data Commons that include Pinyon-Juniper species of interest.
+-2_range_health_022024.R: Script to clean, do initial summary calculations of rangeland health data, pull rangeland health data together for the PJ species, and create rangeland health figures.
+-data: folder housing the data needed in the two scripts above
+-PJ-Woodlands.Rproj: R project file to contain the two scripts and make running the scripts and working with the data easier.
