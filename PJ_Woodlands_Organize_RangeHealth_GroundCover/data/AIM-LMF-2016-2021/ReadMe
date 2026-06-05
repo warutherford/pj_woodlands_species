@@ -1,3 +1,227 @@
 AIM data used and imported in the scripts is provided in the "AIM-LMF-2016-2021" folder, where individual Rdata files were created from the raw data ("rh_pj_aim_ind.csv") in the previous folder to speed up the code. The AIM Interpreting Indicators of Rangeland Health data is available in the raw "rh_pj_aim_ind.csv" file. NRI data is not provided since it is geolocated (lat,lon associated), which requires a confidentiality agreement to view or view raw data without geolocation.
 
 NRI data is available through a confidentiality agreement(email NRI@usda.gov), BLM AIM is provided here only. Analysis with NRI and AIM data followed same workflow where protocols were the same. Code to organize NRI data is still provided in the scripts.
+
+File-level metadata:
+
+-header.Rdata: BLM AIM and NRI header data result from using R terradactyl package for summarizing AIM and NRI data. Rdata files were created to speed up ingest and save memory, and they should be opened in R.
+-header.csv: BLM AIM and NRI header data result from using R terradactyl package for summarizing AIM and NRI data. 
+
+-indicators.Rdata: BLM AIM and NRI indicators data result from using R terradactyl package for summarizing AIM and NRI data. Rdata files were created to speed up ingest and save memory, and they should be opened in R.
+-indicators.csv: BLM AIM and NRI indicators data result from using R terradactyl package for summarizing AIM and NRI data.
+
+-rangeland_health_tall.Rdata: BLM AIM and NRI rangeland health data in tall (not wide) format from using R terradactyl package for summarizing AIM and NRI data. Rdata files were created to speed up ingest and save memory, and they should be opened in R.
+-rangeland_health_tall.csv: BLM AIM and NRI rangeland health data in tall (not wide) format from using R terradactyl package for summarizing AIM and NRI data. 
+
+-species_inventory_tall.Rdata: BLM AIM and NRI species inventory data in tall (not wide) format from using R terradactyl package for summarizing AIM and NRI data. Rdata files were created to speed up ingest and save memory, and they should be opened in R.
+-species_inventory_tall.csv: BLM AIM and NRI species inventory data in tall (not wide) format from using R terradactyl package for summarizing AIM and NRI data. 
+
+-species.rds: BLM AIM and NRI species-level metrics data result from using R terradactyl package for summarizing AIM and NRI data. All species level information for all points, which is a lot of data, so a rds file was created to speed up ingest and save memory, and should be opened in R.
+-species.csv: BLM AIM and NRI species-level metrics data result from using R terradactyl package for summarizing AIM and NRI data.
+
+Column-level metadata:
+
+-header.csv
+PrimaryKey – String; unique record identifier combining plot key and load date; interpreted as an AIM/DIMA internal key where format encodes date-time; no units; missing values generally not present.
+SpeciesState – Categorical string; two‑letter state abbreviation for the record (e.g., OR, ID, CO); uses USPS codes; no missing-value codes except occasional “NA”.
+PlotID – Categorical string; plot identifier created by field offices (alphanumeric, sometimes including transect or stratum); no units; formatting varies by project.
+PlotKey – String/integer; numeric unique plot key used by DIMA; no units; required for joins to other AIM tables; no special missing-value codes.
+DBKey – String; filename of source database (DIMA .mdb), indicating project/year; no units; essential for data lineage; missing values are rare.
+EcologicalSiteId – Categorical string; ecological site code following NRCS/BLM format (e.g., R023XY200OR); interpret using NRCS ESIS; “UNKNOWN” indicates missing classification.
+Latitude_NAD83 – Numeric; latitude in decimal degrees referenced to NAD83 datum; no missing-value codes other than occasional “NA”.
+Longitude_NAD83 – Numeric; longitude in decimal degrees, NAD83 datum; negative values denote western hemisphere; “NA” used when missing.
+State – Categorical string; repeated state field using USPS two‑letter codes; no units; “NA” indicates missing.
+Elevation – Numeric; site elevation in meters (occasionally feet in older datasets, requires project-level metadata for certainty); no special missing-value codes other than “NA”.
+County – Categorical string; county name for the site; no units; “UNKNOWN” or “NA” indicates missing.
+DateEstablished – Datetime; date the plot was originally established in local time (YYYY‑MM‑DD HH:MM:SS); missing appears as “NA”.
+DateLoadedInDb – Date; date the record was loaded into the database (YYYY‑MM‑DD); used for version control; no special missing codes.
+Design – Categorical string; survey design type (e.g., Random, Targeted); typically “NA” when not recorded.
+DesignFlag – Categorical string/boolean-like; flags special design conditions; “NA” denotes not used.
+Purpose – Categorical string; project purpose (e.g., Planning, Fuels, ESR, Wildlife); uses AIM purpose coding schemes; “NA” indicates unavailable.
+PurposeFlag – Categorical/boolean-like; additional qualifier for Purpose; normally “NA” if unused.
+ProjectName – String; project or field office monitoring campaign name; no units; naming is administrative and varies by office.
+DateVisited – Datetime; actual field visit timestamp (local time, YYYY‑MM‑DD HH:MM:SS); no missing-value codes except “NA”.
+Source – Categorical string; data origin, typically “TerrADat” for AIM terrestrial core; no units; stable coding.
+LocationType – Categorical string; describes special site type when present; often “NA”; interpret using project metadata.
+PercentCoveredByEcoSite – Numeric; percent of plot area mapped to the ecological site (0–100); unit = percent; “NA” indicates not assessed.
+
+-indicators.csv
+rid – Numeric: unique record ID with no units, using NA for missing values.
+PrimaryKey – Categorical (string): unique identifier for plot/visit records, with no units and blanks indicating missing values.
+DBKey – Categorical (string): database key referencing source tables, using blanks/NA when not assigned.
+ProjectKey – Categorical (string): project identifier with no units and NA for missing values.
+DateVisited – Date: calendar date of field sampling in ISO or MM/DD/YYYY format, with blank entries indicating missing dates.
+EcologicalSiteId – Categorical: ecological site code defined by NRCS, character string with NA for unknown sites.
+PercentCoveredByEcoSite – Numeric: percent of plot area inside mapped ecological site (units = percent, 0–100), NA when not estimated.
+Latitude_NAD83 – Numeric: latitude in decimal degrees referenced to NAD83 datum, NA when unavailable.
+Longitude_NAD83 – Numeric: longitude in decimal degrees referenced to NAD83 datum, NA when unavailable.
+LocationStatus – Categorical: code indicating whether location is accepted/moved/estimated, following AIM location coding scheme with NA for missing.
+LocationType – Categorical: plot type (e.g., base, oversample, benchmark), NA when unspecified.
+Latitude_NAD83_Actual – Numeric: measured latitude after in‑field correction in NAD83 decimal degrees, NA if not collected.
+Longitude_NAD83_Actual – Numeric: measured longitude after in‑field correction in NAD83 decimal degrees, NA if not collected.
+BareSoilCover – Numeric: percent ground cover of exposed soil (0–100%), NA for no observation.
+TotalFoliarCover – Numeric: percent foliar canopy cover of all live vegetation (0–100%), NA for missing.
+AH_AnnGrassCover – Numeric: percent foliar cover of annual grasses (0–100%), NA when absent.
+AH_ForbCover – Numeric: percent foliar cover of all forbs (0–100%), NA for missing.
+AH_GrassCover – Numeric: percent foliar cover of all grasses (annual+perennial) in percent, NA for missing.
+AH_PerenForbCover – Numeric: percent foliar cover of perennial forbs, NA when no measurement.
+AH_PerenForbGrassCover – Numeric: percent combined foliar cover of perennial forbs and grasses, NA when missing.
+AH_PerenGrassCover – Numeric: percent foliar cover of perennial grasses, NA for missing.
+AH_ShrubCover – Numeric: percent foliar cover of shrubs, NA for missing.
+FH_CyanobacteriaCover – Numeric: percent ground cover of cyanobacteria crust, NA for missing.
+FH_DepSoilCover – Numeric: percent depositional soil feature cover, NA when absent.
+FH_DuffCover – Numeric: percent duff cover (partially decomposed litter), NA for missing.
+FH_EmbLitterCover – Numeric: percent embedded litter cover, NA when not observed.
+FH_HerbLitterCover – Numeric: percent herbaceous litter cover, NA for missing.
+FH_LichenCover – Numeric: percent soil‑surface lichen cover, NA when absent.
+FH_MossCover – Numeric: percent soil‑surface moss cover, NA for missing.
+FH_RockCover – Numeric: percent surface rock cover, NA when not recorded.
+FH_TotalLitterCover – Numeric: percent total litter cover, NA for missing.
+FH_VagrLichenCover – Numeric: percent unattached/vagrant lichen cover, NA when absent.
+FH_WaterCover – Numeric: percent standing‑water cover, NA when dry.
+FH_WoodyLitterCover – Numeric: percent woody litter cover, NA for missing.
+GapCover_101_200 – Numeric: percent canopy gaps 101–200 cm in size, NA when unmeasured.
+GapCover_200_plus – Numeric: percent canopy gaps ≥200 cm, NA for missing.
+GapCover_25_50 – Numeric: percent canopy gaps 25–50 cm, NA for missing.
+GapCover_25_plus – Numeric: percent canopy gaps ≥25 cm, NA for missing.
+GapCover_51_100 – Numeric: percent canopy gaps 51–100 cm, NA for missing.
+Hgt_Forb_Avg – Numeric: average forb height (cm), NA when not measured.
+Hgt_Grass_Avg – Numeric: average grass height (cm), NA for missing.
+Hgt_Herbaceous_Avg – Numeric: height of all herbaceous vegetation (cm), NA when no measurement.
+Hgt_PerenForb_Avg – Numeric: average perennial forb height (cm), NA if no values.
+Hgt_PerenForbGrass_Avg – Numeric: combined perennial forb+grass height (cm), NA for missing.
+Hgt_PerenGrass_Avg – Numeric: average perennial grass height (cm), NA for missing.
+Hgt_Woody_Avg – Numeric: average woody‑plant height (cm), NA for missing.
+RH_AnnualProd – Numeric/categorical score: Rangeland Health (RH) indicator for annual production (unitless ordinal score), NA when not scored.
+RH_BareGround – Numeric/categorical score: RH rating for bare ground (ordinal), NA when missing.
+RH_BioticIntegrity – Numeric: composite RH metric for biotic integrity (unitless index), NA when missing.
+RH_CommentsBI – Categorical/text: comments on biotic integrity, blanks indicate none.
+RH_CommentsHF – Text: comments on hydrologic function, blank if none.
+RH_CommentsSS – Text: comments on soil/site stability, blank if none.
+RH_Compaction – Numeric/categorical: RH indicator for soil compaction (ordinal), NA when not scored.
+RH_DeadDyingPlantParts – Numeric/ordinal: RH score for dead/dying plant material, NA if not assessed.
+RH_FuncSructGroup – Numeric/ordinal: RH indicator for functional/structural groups, NA when missing.
+RH_Gullies – Numeric/ordinal: RH indicator for gullies, NA when missing.
+RH_HydrologicFunction – Numeric: overall RH hydrologic function rating (unitless), NA if missing.
+RH_InvasivePlants – Numeric/ordinal: RH indicator describing invasive plant influence, NA when not scored.
+RH_LitterAmount – Numeric/ordinal: RH score of litter amount, NA when missing.
+RH_LitterMovement – Numeric/ordinal: RH score for litter movement patterns, NA when missing.
+RH_PedestalsTerracettes – Numeric/ordinal: RH score for pedestals/terracettes, NA when missing.
+RH_PlantCommunityComp – Numeric/ordinal: RH indicator for plant community composition, NA for missing.
+RH_ReprodCapabilityPeren – Numeric/ordinal: RH score for perennial reproductive capability, NA when not scored.
+RH_Rills – Numeric/ordinal: RH indicator for rills, NA when missing.
+RH_SoilSiteStability – Numeric: RH soil/site stability rating (unitless), NA when missing.
+RH_SoilSurfLossDeg – Numeric/ordinal: RH indicator for surface soil loss/degradation, NA if missing.
+RH_SoilSurfResisErosion – Numeric/ordinal: RH score for surface resistance to erosion, NA for missing.
+RH_WaterFlowPatterns – Numeric/ordinal: RH indicator for water‑flow patterns, NA for missing.
+RH_WindScouredAreas – Numeric/ordinal: RH score for wind‑scoured areas, NA when missing.
+SoilStability_All – Numeric: mean soil stability (1–6 field test scale), NA for missing.
+SoilStability_Protected – Numeric: soil stability score at protected points (1–6), NA if not collected.
+SoilStability_Unprotected – Numeric: soil stability score at unprotected points (1–6), NA if not collected.
+DateLoadedInDb – Date: date the record was ingested into the database, blank for missing.
+mlra_name – Categorical: MLRA descriptive name, blanks indicate missing.
+mlrarsym – Categorical: MLRA symbol code, NA if unknown.
+na_l1name – Categorical: North America Level‑1 ecoregion, NA for missing.
+na_l2name – Categorical: North America Level‑2 ecoregion, NA for missing.
+us_l3name – Categorical: US Level‑3 ecoregion, NA for missing.
+us_l4name – Categorical: US Level‑4 ecoregion, NA for missing.
+State – Categorical: U.S. state abbreviation or name, NA when missing.
+modis_landcover – Categorical: MODIS land‑cover class code (IGBP scheme), NA if no classification exists
+
+-rangeland_health_tall.csv
+PrimaryKey – Categorical (string): unique plot or visit identifier with no units, using blank/NA to indicate missing values.
+DBKey – Categorical (string): database key referencing the parent dataset or source table, with blanks/NA representing missing entries.
+RecKey – Categorical (string): unique record‑level identifier within the dataset, no units, blanks/NA for unassigned values.
+RH_HydrologicFunction – Numeric/ordinal score: Rangeland Health rating evaluating hydrologic function, using unitless ordinal categories (typically 1–5 or 1–3 depending on protocol), with NA indicating unscored assessments.
+RH_BioticIntegrity – Numeric/ordinal score: composite Rangeland Health metric describing biotic integrity, unitless, NA when not evaluated.
+RH_SoilSiteStability – Numeric/ordinal score: Rangeland Health metric for soil and site stability, unitless, NA when unscored.
+RH_CommentsBI – Text field: free‑text comments describing biotic integrity observations, blank when no comments were recorded.
+RH_CommentsHF – Text field: free‑text notes on hydrologic function, blank when not provided.
+RH_CommentsSS – Text field: narrative comments regarding soil/site stability, blank if absent.
+Observer – Categorical (string): name or code identifying the observer who conducted the assessment; blanks/NA indicate missing information.
+Recorder – Categorical (string): name or code of the individual entering or recording data, blank/NA for missing entries.
+RH_AnnualProd – Numeric/ordinal score: rating of annual production relative to ecological site potential (unitless), NA when not scored.
+RH_BareGround – Numeric/ordinal score: evaluation of bare‑ground extent relative to reference conditions, unitless, NA for missing.
+RH_Compaction – Numeric/ordinal score: indicator assessing soil compaction presence and severity, unitless, NA when not assessed.
+RH_DeadDyingPlantParts – Numeric/ordinal score: indicator describing abundance of dead/dying plant parts compared to reference, unitless, NA for missing.
+RH_FuncSructGroup – Numeric/ordinal score: assessment of functional/structural plant groups relative to ecological site reference, unitless, NA when not scored.
+RH_Gullies – Numeric/ordinal score: indicator evaluating gully presence and activity, unitless, NA for missing observations.
+RH_InvasivePlants – Numeric/ordinal score: Rangeland Health rating for invasive species presence and influence, unitless, NA if unscored.
+RH_LitterAmount – Numeric/ordinal score: indicator evaluating total litter amount relative to site potential, unitless, NA when not assessed.
+RH_LitterMovement – Numeric/ordinal score: assessment of litter redistribution/movement patterns, unitless, NA when missing.
+RH_PedestalsTerracettes – Numeric/ordinal score: indicator evaluating pedestal and terracette formation, unitless, NA when unscored.
+RH_PlantCommunityComp – Numeric/ordinal score: indicator for plant community composition relative to reference state, unitless, NA for missing.
+RH_ReprodCapabilityPeren – Numeric/ordinal score: assessment of perennial plants’ reproductive capability, unitless, NA when unscored.
+RH_Rills – Numeric/ordinal score: indicator describing rill presence and extent, unitless, NA when not observed.
+RH_SoilSurfLossDeg – Numeric/ordinal score: indicator assessing soil surface loss or degradation severity, unitless, NA for missing values.
+RH_SoilSurfResisErosion – Numeric/ordinal score: indicator evaluating soil surface resistance to erosion, unitless, NA when unmeasured.
+RH_WaterFlowPatterns – Numeric/ordinal score: assessment of water flow patterns and redistribution, unitless, NA for missing.
+RH_WindScouredAreas – Numeric/ordinal score: indicator describing wind‑scour features and extent, unitless, NA when absent or unscored.
+source – Categorical (string): identifies the origin of the record (e.g., project, program, dataset), with blanks/NA representing missing entries; no units.
+DateVisited – Date: calendar date the plot was visited and Rangeland Health data collected, formatted as ISO or MM/DD/YYYY, blank when not recorded.
+
+-species_inventory_tall.csv
+PrimaryKey – Categorical (string): unique identifier for the plot or sampling event, no units, with NA/blank values indicating missing keys.
+DBKey – Categorical (string): database-level key linking the record to a parent dataset, no units, with blanks/NA representing missing entries.
+LineKey – Categorical (string): unique identifier for the line‑transect segment associated with the record, using blanks/NA for missing values.
+RecKey – Categorical (string): unique record identifier within the line or subplot, no units, NA/blank when absent.
+FormDate – Date: date when the species‑richness form was completed, stored as ISO or MM/DD/YYYY, with blanks for missing dates.
+Observer – Categorical (string): name or code for the person who conducted the species‑richness observations, blank/NA when not documented.
+Recorder – Categorical (string): name or code for the person entering the data on the form, blank/NA for missing entries.
+SpecRichMethod – Categorical: method used to assess species richness (e.g., quadrat, belt, timed search), units = none, using NA for missing method codes.
+SpecRichMeasure – Categorical: measurement type used for richness (e.g., presence/absence, count), no units, NA for missing.
+SpecRichNbrSubPlots – Numeric (integer): number of subplots used to measure species richness, unitless count, NA for missing.
+SpecRich1Container – Categorical: type of container or frame used for subplot 1 (e.g., hoop, quadrat), no units, NA when unspecified.
+SpecRich1Shape – Categorical: geometric shape of subplot 1 (circle, square, rectangle), NA/blank when unknown.
+SpecRich1Dim1 – Numeric: primary dimension of subplot 1 (e.g., diameter or length) measured in meters, NA when not recorded.
+SpecRich1Dim2 – Numeric: secondary dimension of subplot 1 (e.g., width) in meters, NA when not applicable.
+SpecRich1Area – Numeric: calculated area of subplot 1 in square meters (m²), NA when dimensions are missing.
+SpecRich2Container – Categorical: container/frame type for subplot 2, NA when unspecified.
+SpecRich2Shape – Categorical: subplot 2 geometry, no units, NA for missing.
+SpecRich2Dim1 – Numeric: primary subplot 2 dimension in meters, NA for missing.
+SpecRich2Dim2 – Numeric: secondary subplot 2 dimension in meters, NA when absent.
+SpecRich2Area – Numeric: subplot 2 area in m², NA when dimensions incomplete.
+SpecRich3Container – Categorical: container/frame type for subplot 3, NA for missing.
+SpecRich3Shape – Categorical: subplot 3 shape, NA/blank for missing.
+SpecRich3Dim1 – Numeric: primary subplot 3 dimension in meters, NA when unmeasured.
+SpecRich3Dim2 – Numeric: secondary subplot 3 dimension in meters, NA for missing.
+SpecRich3Area – Numeric: calculated subplot 3 area in m², NA if not computed.
+SpecRich4Container – Categorical: container/frame type for subplot 4, NA when missing.
+SpecRich4Shape – Categorical: subplot 4 shape descriptor, NA for unrecorded values.
+SpecRich4Dim1 – Numeric: primary subplot 4 dimension in meters, NA for missing.
+SpecRich4Dim2 – Numeric: secondary subplot 4 dimension in meters, NA for missing.
+SpecRich4Area – Numeric: subplot 4 area in m², NA when not calculated.
+SpecRich5Container – Categorical: container/frame type for subplot 5, NA when unspecified.
+SpecRich5Shape – Categorical: subplot 5 shape descriptor, NA when missing.
+SpecRich5Dim1 – Numeric: primary subplot 5 dimension in meters, NA if not recorded.
+SpecRich5Dim2 – Numeric: secondary subplot 5 dimension in meters, NA when not applicable.
+SpecRich5Area – Numeric: subplot 5 area in m², NA when dimensions absent.
+SpecRich6Container – Categorical: container or frame type for subplot 6, NA for missing.
+SpecRich6Shape – Categorical: subplot 6 shape, NA/blank if unrecorded.
+SpecRich6Dim1 – Numeric: primary subplot 6 dimension in meters, NA for missing.
+SpecRich6Dim2 – Numeric: secondary subplot 6 dimension in meters, NA when not measured.
+SpecRich6Area – Numeric: area of subplot 6 in m², NA if not computed.
+Notes – Text: free‑text field used for ancillary observations, explanations, or anomalies; blank values mean no notes provided.
+Species – Categorical (string): species code or full scientific name following the project’s taxonomic coding scheme, NA when unidentified.
+source – Categorical (string): origin of the record (e.g., dataset or project), no units, NA for missing.
+SpeciesCount – Numeric (integer): count of individuals or occurrences of the recorded species depending on method definition, unitless, NA when not tallied.
+DENSITY – Numeric (float): species density calculated per square meter (m²) or per subplot area depending on protocol, NA for missing.
+PLOTKEY – Categorical (string): identifier for the parent plot associated with the richness subplot or record, blank/NA for missing.
+DateVisited – Date: date when the plot was visited and species richness data collected, stored as ISO or MM/DD/YYYY, blank for missing dates.
+
+-species.csv
+rid – Numeric: unique record identifier with no units, using NA/blank values for missing entries.
+PrimaryKey – Categorical (string): unique plot or sampling‑unit identifier, no units, NA/blank when missing.
+DBKey – Categorical (string): database key linking the record to its parent dataset, blank/NA when unspecified.
+ProjectKey – Categorical (string): code identifying the project under which the vegetation data were collected, NA when not recorded.
+Species – Categorical (string): plant species code or scientific name following the project’s taxonomy scheme, NA when unidentified.
+AH_SpeciesCover – Numeric: foliar percent cover for the specified species recorded using the AIM “Any Hit (AH)” method, units = percent (0–100), NA for missing.
+AH_SpeciesCover_n – Numeric (integer): number of points or observations contributing to AH_SpeciesCover, unitless count, NA when no hits occurred.
+Hgt_Species_Avg – Numeric: average height of the species across measured points or plants, units = centimeters (cm), NA when unmeasured.
+Hgt_Species_Avg_n – Numeric (integer): number of height measurements used to compute Hgt_Species_Avg, unitless count, NA when no measurements exist.
+Duration – Categorical: species life‑history duration (annual, biennial, perennial), following NRCS coding; NA when unspecified.
+GrowthHabit – Categorical: primary growth form (e.g., forb, graminoid, shrub, tree), using NRCS approved codes, NA/blank when missing.
+GrowthHabitSub – Categorical: finer growth habit classification (e.g., bunchgrass, sodgrass, subshrub), using NRCS subclass codes, NA when not assigned.
+SpeciesKey – Categorical (string): internal unique identifier for species within the database or lookup table, no units, NA when missing.
+DateLoadedInDb – Date: date the record was ingested into the database, in ISO or MM/DD/YYYY format, blank for missing.
+DateVisited – Date: field visit date when the species‑level cover/height data were collected, stored as ISO or MM/DD/YYYY, blank when not recorded.
