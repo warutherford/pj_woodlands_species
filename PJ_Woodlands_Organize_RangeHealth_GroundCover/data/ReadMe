@@ -1,3 +1,40 @@
-AIM data used and imported in the scripts is provided in the "AIM-LMF-2016-2021" folder. The AIM Interpreting Indicators of Rangeland Health data is available in the "rh_pj_aim_ind.csv" file. NRI data is not provided since it is geolocated (lat,lon associated), which requires a confidentiality agreement to view or view raw data without geolocation.
+AIM data used and imported in the scripts is provided in the "AIM-LMF-2016-2021" folder. The AIM Interpreting Indicators of Rangeland Health data for this work is available in the "rh_pj_aim_ind.csv" file. NRI data is not provided since it is geolocated (lat,lon associated), which requires a confidentiality agreement to view and/or view raw data without geolocation.
 
 NRI data is available through a confidentiality agreement(email NRI@usda.gov), BLM AIM is provided here only. Analysis with NRI and AIM data followed same workflow where protocols were the same. Code to organize NRI data is still provided in the scripts.
+
+File-level metadata:
+
+-AIM-LMF-2016-2021 folder: as mentioned above, this contains all the AIM data used originating from Landscape Data Commons, pre-processed through the terradactyl package, and imported through the R scripts
+
+Column-level metadata:
+
+-rh_pj_aim_ind.csv
+PrimaryKey – Categorical (string): unique identifier for a plot or visit record with no units, using NA/blank for missing values.
+species – Categorical (string): species code or scientific name following the project’s taxonomy system (e.g., JUOS, PIMO), with NA when unidentified
+density – Numeric (float): species density measured per subplot or per square meter depending on protocol, NA when no density estimate is available.
+speciescount – Numeric (integer): count of individuals or occurrences of the species used to derive density or presence metrics, NA for missing counts.
+source – Categorical (string): source dataset from which the record originated (e.g., TerrADat), no units, NA for missing entries
+reckey – Categorical (string): unique key identifying the specific record within the dataset, no units, NA or blank when not provided.
+rh_hydrologicfunction – Numeric/ordinal: Rangeland Health indicator score for hydrologic function (unitless), typically 1–5 or 1–3 depending on protocol, NA when unscored.
+rh_hf_sum – Numeric: averaged hydrologic function score (unitless), derived from multiple RH indicators, NA when not calculated.
+rh_commentshf – Text: free‑text comments describing hydrologic‑function conditions, blank/NA when no comments were recorded.
+rh_bioticintegrity – Numeric/ordinal: Rangeland Health score for biotic integrity (unitless), NA when not scored.
+rh_bi_sum – Numeric: averaged biotic‑integrity score (unitless), NA when missing.
+rh_commentsbi – Text: comments describing biotic‑integrity observations, blank when none provided.
+rh_soilsitestability – Numeric/ordinal: Rangeland Health score describing soil/site stability (unitless), NA for missing values.
+rh_sss_sum – Numeric: averaged soil‑site stability score (unitless), NA when not computed.
+rh_commentsss – Text: free‑text comments describing soil/site stability, blank when missing.
+rh_plantcommunitycomp – Numeric/ordinal: Rangeland Health indicator score for plant community composition (unitless), NA when unscored.
+DBKey – Categorical (string): database key linking the record to the source dataset, blank/NA when unassigned.
+ecositeID – Categorical (string): NRCS ecological site identifier (e.g., R028BY010NV), NA when unknown 
+latitude_nad83 – Numeric: plot latitude in decimal degrees referenced to the NAD83 datum, NA when not recorded.
+longitude_nad83 – Numeric: plot longitude in decimal degrees referenced to the NAD83 datum, NA for missing entries.
+state – Categorical (string): U.S. state abbreviation where the plot occurs (e.g., NV), NA for missing values 
+elevation – Numeric: elevation of the plot in meters above sea level, NA when not recorded.
+county – Categorical (string): county name associated with the plot location (e.g., White Pine County), blank/NA when missing 
+percentcoveredbyecosite – Numeric: proportion of the plot area that falls within the mapped ecological site, expressed as a percent (0–100%), NA when not estimated.
+AH_PerenForbGrassCover – Numeric: percent foliar cover of perennial forbs and grasses combined using AIM “Any Hit (AH)” methodology, units = percent, NA for missing.
+AH_ShrubCover – Numeric: percent foliar cover of shrubs recorded via AH method, units = percent, NA when unmeasured.
+BareSoilCover – Numeric: percent cover of exposed mineral soil, units = percent (0–100%), NA for missing values.
+SoilStability_All – Numeric: average soil stability value (typically 1–6 field stability scale), unitless index, NA when not recorded.
+modis_landcover – Categorical: MODIS land‑cover class label (e.g., Permanent Wetlands, Grasslands as shown in rh_pj_aim_ind), NA for unclassified pixels
