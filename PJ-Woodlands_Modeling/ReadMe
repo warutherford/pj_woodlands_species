@@ -1,0 +1,50 @@
+File-level metadata for the scripts in this folder:
+1_pj_clustering_spatial_12032023.R: First script to be used for pre-processing data for used for PJ community-level random forest modeling and figure generation.
+
+Data: data folder containing the data needed for use in all the R scripts in this folder.
+
+pj_clustering_pca_juoc_07172023.R: Script to be used for pre-processing data for used for JUOC modeling and PCA/biplot figure generation.
+
+pj_clustering_rf_07132023_jumo.R: Script to be used for pre-processing data for used for JUMO random forest modeling and figure generation.
+
+pj_clustering_rf_07132023_juos.R: Script to be used for pre-processing data for used for JUOS random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_pied.R: Script to be used for pre-processing data for used for PIED random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_juas.R: Script to be used for pre-processing data for used for JUAS random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_juco06.R: Script to be used for pre-processing data for used for JUCO06 random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_jude2.R: Script to be used for pre-processing data for used for JUDE2 random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_juoc.R: Script to be used for pre-processing data for used for JUOC random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_jupi.R: Script to be used for pre-processing data for used for JUPI random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_jusc2.R: Script to be used for pre-processing data for used for JUSC2 random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_juvi.R: Script to be used for pre-processing data for used for JUVI random forest modeling and figure generation.
+
+pj_clustering_rf_07142023_pimo.R: Script to be used for pre-processing data for used for PIMO random forest modeling and figure generation.
+
+pj_pca_biplots_juas_07172023.R: Script to be used for pre-processing data for used for JUAS modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_jude2_07172023.R: Script to be used for pre-processing data for used for JUDE2 modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_jumo_07172023.R: Script to be used for pre-processing data for used for JUMO modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_juoc_07172023.R: Script to be used for pre-processing data for used for JUOC modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_juos_07172023.R: Script to be used for pre-processing data for used for JUOS modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_juvi_07172023.R: Script to be used for pre-processing data for used for JUVI modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_jupi_07172023.R: Script to be used for pre-processing data for used for JUPI modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_jusc2_07172023.R: Script to be used for pre-processing data for used for JUSC2 modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_pied_07172023.R: Script to be used for pre-processing data for used for PIED modeling and PCA/biplot figure generation.
+
+pj_pca_biplots_pimo_07172023.R: Script to be used for pre-processing data for used for PIMO modeling and PCA/biplot figure generation.
+
+PJ-Woodlands_Modeling.Rproj: R project for working this all these scripts and tie to the data in the "Data" folder.
